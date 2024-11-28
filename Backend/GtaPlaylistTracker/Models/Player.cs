@@ -10,5 +10,7 @@ namespace GtaPlaylistTracker.Models
         public string Gamertag { get; set; }
         public string? Name { get; set; }
         public string? ProfilePictureUrl { get; set; }
+
+        public ICollection<PlaylistResult> PlaylistResults { get; set; }
     }
 }

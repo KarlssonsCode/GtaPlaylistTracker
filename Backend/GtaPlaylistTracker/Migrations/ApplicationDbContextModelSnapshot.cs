@@ -81,16 +81,18 @@ namespace GtaPlaylistTracker.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GameId");
+
                     b.ToTable("Playlists");
                 });
 
             modelBuilder.Entity("GtaPlaylistTracker.Models.PlaylistResult", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("PlaylistId")
+                        .HasColumnType("int");
 
                     b.Property<double>("FinishPosition")
                         .HasColumnType("float");
@@ -98,19 +100,59 @@ namespace GtaPlaylistTracker.Migrations
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PlaylistId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Points")
                         .HasColumnType("float");
 
                     b.Property<bool>("RageQuit")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id", "PlaylistId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("PlaylistId");
 
                     b.ToTable("PlaylistsResult");
+                });
+
+            modelBuilder.Entity("GtaPlaylistTracker.Models.Playlist", b =>
+                {
+                    b.HasOne("GtaPlaylistTracker.Models.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("GtaPlaylistTracker.Models.PlaylistResult", b =>
+                {
+                    b.HasOne("GtaPlaylistTracker.Models.Player", "Player")
+                        .WithMany("PlaylistResults")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GtaPlaylistTracker.Models.Playlist", "Playlist")
+                        .WithMany("PlaylistResults")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+
+                    b.Navigation("Playlist");
+                });
+
+            modelBuilder.Entity("GtaPlaylistTracker.Models.Player", b =>
+                {
+                    b.Navigation("PlaylistResults");
+                });
+
+            modelBuilder.Entity("GtaPlaylistTracker.Models.Playlist", b =>
+                {
+                    b.Navigation("PlaylistResults");
                 });
 #pragma warning restore 612, 618
         }

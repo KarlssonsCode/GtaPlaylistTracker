@@ -1,2 +1,11 @@
 //@import 'bootstrap/scss/bootstrap';
 //@import '../src/app/styling/styling.scss';
+
+body {
+    background-image: url('assets/images/standard-background.png');
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    height: 100vh; 
+    margin: 0;
+  }

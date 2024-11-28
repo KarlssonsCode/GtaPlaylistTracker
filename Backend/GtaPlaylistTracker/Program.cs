@@ -17,6 +17,7 @@ namespace GtaPlaylistTracker
 
             builder.Services.AddScoped<PlayerService>();
             builder.Services.AddScoped<PlaylistService>();
+            builder.Services.AddScoped<PlaylistResultService>();
             builder.Services.AddScoped<GameService>();
 
             builder.Services.AddControllers();

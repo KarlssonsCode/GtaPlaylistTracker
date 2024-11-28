@@ -13,5 +13,8 @@ namespace GtaPlaylistTracker.Models
         [Required]
         public int Races { get; set; }
 
+        public Game Game { get; set; }
+
+        public ICollection<PlaylistResult> PlaylistResults { get; set; }
     }
 }

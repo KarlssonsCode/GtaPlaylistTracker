@@ -7,7 +7,7 @@ namespace GtaPlaylistTracker.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public string PlaylistId { get; set;}
+        public int PlaylistId { get; set;}
         [Required]
         public int PlayerId { get; set; }
         [Required]
@@ -16,6 +16,9 @@ namespace GtaPlaylistTracker.Models
         public double FinishPosition { get; set; }
         [Required]
         public bool RageQuit { get; set; }
+
+        public Player Player { get; set; }
+        public Playlist Playlist { get; set; }
 
     }
 }
