@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Add a new player</h1>
+    <form (ngSubmit)="createPlayer()">
+        <div>
+            <label><strong>Name</strong></label>
+            <input type="text" id="gamertag" [(ngModel)]="gamertag" name="gamertag" required>
+        </div>
+        <div>
+            <label><strong>Real name (Optional)</strong></label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" required>
+        </div>
+        <div>
+            <label><strong>Profile picture</strong></label>
+            <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*"> --> 
+            <!-- Trying to learn how to upload profile pictures -->
+        </div>
+        <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+    
+    
+</div>

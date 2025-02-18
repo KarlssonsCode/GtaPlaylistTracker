@@ -1,11 +1,32 @@
 //@import 'bootstrap/scss/bootstrap';
-//@import '../src/app/styling/styling.scss';
+// @import '../src/app/styling/styling.scss';
 
 body {
-    background-image: url('assets/images/standard-background.png');
-    background-size: cover; 
-    background-position: center center; 
-    background-repeat: no-repeat; 
-    height: 100vh; 
-    margin: 0;
-  }
+  background-image: url('assets/images/standard-background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Jaro';
+  src: url('assets/fonts/Jaro-Regular-VariableFont_opsz.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pricedown';
+  src: url('assets/fonts/pricedown\ bl.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Chalet';
+  src: url('assets/fonts/Chalet\ LondonNineteenSixty\ Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
