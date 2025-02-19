@@ -33,6 +33,17 @@ namespace GtaPlaylistTracker.Services
             return await _context.Players.ToListAsync();
         }
 
+        public async Task<Player> GetPlayerByIdAsync(int playerId)
+        {
+            return await _context.Players.FirstOrDefaultAsync(x => x.Id == playerId);  
+        }
+
+        public async Task<bool> UpdatePlayerAsync(Player player)
+        {
+            _context.Players.Update(player);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
 
     }
 }

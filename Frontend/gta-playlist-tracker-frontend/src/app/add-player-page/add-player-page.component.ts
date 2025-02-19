@@ -14,28 +14,48 @@ import { CommonModule } from '@angular/common';
 export class AddPlayerPageComponent {
   gamertag: string = '';
   name?: string = '';
-  profilePictureUrl?: string = '';
+  profilePicture?: File;
+  profilePicturePreview?: string;
+  playerId?: number;
 
   constructor(
     private playerService: PlayerService	
   ) {}
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.profilePicture = file;
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.profilePicturePreview = e .target.result;
+      reader.readAsDataURL(file);
+    }
+  }
+
   createPlayer() {
     const request: CreatePlayerRequest = {
       gamertag: this.gamertag,
       name: this.name,
-      profilePictureUrl: this.profilePictureUrl,
+      profilePictureUrl: ''
     };
 
-    this.playerService.createNewPlayer(request).subscribe({
-      next: () => {
-        console.log('Player has been created');
-      },
-      error: (err) => {
-        console.error('Something went wrong:', err)
+    this.playerService.createNewPlayer(request).subscribe(player => {
+      if (this.profilePicture) {
+        this.uploadProfilePicture();
       }
-    })
-
+    });
   }
-}
 
+  uploadProfilePicture() {
+    if (!this.profilePicture || !this.playerId) return;  
+
+    const formData = new FormData();
+    formData.append("file", this.profilePicture);
+
+    this.playerService.uploadProfilePicture(this.playerId, this.profilePicture).subscribe({
+      next: () => console.log("Upload successful"),
+      error: err => console.error("Upload failed", err)
+    });
+}
+}

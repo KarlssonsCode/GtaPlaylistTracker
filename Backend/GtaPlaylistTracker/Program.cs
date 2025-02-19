@@ -38,6 +38,13 @@ namespace GtaPlaylistTracker
 
             app.UseAuthorization();
 
+            app.UseCors(builder =>
+            {
+                builder
+                    .WithOrigins(app.Configuration["AllowedOrigins"])
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
 
             app.MapControllers();
 

@@ -1,5 +1,13 @@
 <div class="container">
-    <h1>TEST</h1>
-    <button class="btn btn-primary">Test Bootstrap</button>
-    <button class="btn btn-primary">Test Bootstrap</button>
+    <h1>Players List</h1>
+  <div *ngIf="players.length > 0; else noPlayers">
+    <ul>
+      <li *ngFor="let player of players">
+        <strong>{{ player.gamertag }}</strong> - {{ player.name || 'No Name' }}
+      </li>
+    </ul>
+  </div>
+  <ng-template #noPlayers>
+    <p>No players available.</p>
+  </ng-template>
 </div>

@@ -2,7 +2,7 @@
     <h1>Add a new player</h1>
     <form (ngSubmit)="createPlayer()">
         <div>
-            <label><strong>Name</strong></label>
+            <label><strong>Gamertag</strong></label>
             <input type="text" id="gamertag" [(ngModel)]="gamertag" name="gamertag" required>
         </div>
         <div>
@@ -11,11 +11,14 @@
         </div>
         <div>
             <label><strong>Profile picture</strong></label>
-            <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*"> --> 
-            <!-- Trying to learn how to upload profile pictures -->
+            <input type="file" (change)="onFileSelected($event)"> 
         </div>
         <button type="submit" class="btn btn-primary">Create Account</button>
     </form>
     
+    <div *ngIf="profilePicturePreview">
+        <h3>Preview:</h3>
+        <img [src]="profilePicturePreview" alt="Profile Preview" width="300">
+    </div>
     
 </div>
