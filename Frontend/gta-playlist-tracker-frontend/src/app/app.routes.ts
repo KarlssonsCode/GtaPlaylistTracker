@@ -31,7 +31,7 @@ export const routes: Routes = [
     },
 
     {
-        path: 'game',
+        path: 'add-game',
         component: GamePageComponent,
         title: 'GamePage'
     }

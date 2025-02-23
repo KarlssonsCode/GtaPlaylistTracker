@@ -1,1 +1,8 @@
-<p>game-page works!</p>
+<div class="container">
+    <h1>Add Game</h1>
+    <form (ngSubmit)="addGame()">
+            <label><strong>Game Title</strong></label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" required>
+        <button type="submit" class="btn btn-primary">Add Game</button>
+    </form>
+</div>
