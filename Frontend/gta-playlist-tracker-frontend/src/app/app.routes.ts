@@ -9,30 +9,30 @@ export const routes: Routes = [
     {
         path: '',
         component: StartPageComponent,
-        title: 'StartPage'
+        title: 'Start'
     },
 
     {
         path: 'playlist',
         component: PlaylistPageComponent,
-        title: 'PlaylistPage'
+        title: 'Playlist'
     },
 
     {
         path:'add-player',
         component: AddPlayerPageComponent,
-        title: 'AddPlayerPage'
+        title: 'AddPlayer'
     },
 
     {
         path: 'player',
         component: PlayerPageComponent,
-        title: 'PlayerPage'
+        title: 'Player'
     },
 
     {
         path: 'add-game',
         component: GamePageComponent,
-        title: 'GamePage'
+        title: 'Game'
     }
 ];

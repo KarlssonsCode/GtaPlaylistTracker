@@ -364,7 +364,7 @@ export class PlaylistClient {
     /**
      * @return Success
      */
-    getAllPlaylists(): Observable<void> {
+    getAllPlaylists(): Observable<Playlist[]> {
         let url_ = this.baseUrl + "/Playlist/GetAllPlaylists";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -372,6 +372,7 @@ export class PlaylistClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "text/plain"
             })
         };
 
@@ -382,14 +383,14 @@ export class PlaylistClient {
                 try {
                     return this.processGetAllPlaylists(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<Playlist[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<Playlist[]>;
         }));
     }
 
-    protected processGetAllPlaylists(response: HttpResponseBase): Observable<void> {
+    protected processGetAllPlaylists(response: HttpResponseBase): Observable<Playlist[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -398,7 +399,9 @@ export class PlaylistClient {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Playlist[];
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
