@@ -1,4 +1,5 @@
 ﻿using GtaPlaylistTracker.Contracts.Requests;
+using GtaPlaylistTracker.Models;
 using GtaPlaylistTracker.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,9 +28,13 @@ namespace GtaPlaylistTracker.Controllers
             }
         }
         [HttpGet("GetAllGames")]
-        public async Task<IActionResult> GetAllGames()
+        public async Task<ActionResult<IEnumerable<Game>>> GetAllGames()
         {
             var games = await _gameService.GetAllGamesAsync();
+            if (games == null)
+            {
+                return NotFound();
+            }
             return Ok(games);
         }
     }

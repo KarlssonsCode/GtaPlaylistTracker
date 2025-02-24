@@ -1,3 +1,29 @@
 <div class="container">
     <h1>CREATE PLAYLIST</h1>
+    <form (ngSubmit)="createPlaylist()">
+        <div>
+            <label><strong>PLAYLIST NAME</strong></label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" required>
+        </div>
+        <div>
+            <label><strong>GAME</strong></label>
+            <select id="gameId" [(ngModel)]="gameId" name="gameId" required>
+                <option *ngFor="let game of games" [value]="game.id">{{ game.name }}</option>
+            </select>
+        </div>
+        <div>
+            <label><strong>RACES: {{ raceAmount }}</strong></label>
+            <input
+          type="range"
+          class="form-range input-slider"
+          id="score"
+          [(ngModel)]="raceAmount"
+          name="score"
+          min="10"
+          max="16"
+          (input)="updateScore($event)" />
+        </div>
+        <button type="submit" class="btn btn-primary">CREATE PLAYLIST</button>
+    </form>
 </div>
+

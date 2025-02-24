@@ -12,4 +12,8 @@ export class GameService {
         return this.gameClient.addGame(requestBody);
     }
 
+    getAllGames(): Observable<any[]> {
+        return this.gameClient.getAllGames();
+    }
+
 }

@@ -1,12 +1,62 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { PlaylistService } from '../services/playlist.service';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-playlist-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,FormsModule],
   templateUrl: './playlist-page.component.html',
   styleUrl: './playlist-page.component.scss'
 })
-export class PlaylistPageComponent {
+export class PlaylistPageComponent implements OnInit {
 
+  name: string = '';
+  gameId: number = 0;
+  raceAmount: number = 0;
+
+  games: any[] = [];
+  playlist: any[] = [];
+
+  constructor(private playlistService: PlaylistService,private gameService: GameService) {
+
+  }
+
+  ngOnInit() {
+    this.getAllPlaylists();
+    this.getAllGames();
+  }
+
+  updateScore(event: any) {
+    this.raceAmount = event.target.value;
+  }
+
+  createPlaylist() {
+    const request = {
+      name: this.name,
+      gameId: this.gameId,
+      races: this.raceAmount} ;
+      this.playlistService.createPlaylist(request).subscribe(() => { console.log("Playlist created"); }) };
+      
+
+
+  getAllPlaylists() {
+    this.playlistService.getAllPlaylists().subscribe(playlists => {
+      console.log('Playlist',playlists);
+    });
+  }
+
+  getAllGames(): void {
+    this.gameService.getAllGames().subscribe({
+      next: (games) => {
+      console.log('Games:', games)
+      this.games = games;
+    },
+    error: (err) => { 
+      console.error('Error fetching games:', err);
+    }
+  })
+  }
 }
