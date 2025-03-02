@@ -4,6 +4,7 @@ import { PlaylistPageComponent } from './playlist-page/playlist-page.component';
 import { PlayerPageComponent } from './player-page/player-page.component';
 import { GamePageComponent } from './game-page/game-page.component';
 import { AddPlayerPageComponent } from './add-player-page/add-player-page.component';
+import { PlaylistInfoPageComponent } from './playlist-info-page/playlist-info-page.component';
 
 export const routes: Routes = [
     {
@@ -34,5 +35,12 @@ export const routes: Routes = [
         path: 'add-game',
         component: GamePageComponent,
         title: 'Game'
+    },
+
+    {
+        path: 'playlist-info/:playlistId',
+        component: PlaylistInfoPageComponent,
+        title: 'PlaylistInfo'
     }
+
 ];

@@ -5,4 +5,14 @@
             <input type="text" id="name" [(ngModel)]="name" name="name" required>
         <button type="submit" class="btn btn-primary">Add Game</button>
     </form>
+    <div *ngIf="games.length > 0; else noGames">
+        <ul>
+          <li *ngFor="let game of games">
+            <strong>{{ game.name }}</strong> 
+          </li>
+        </ul>
+      </div>
+      <ng-template #noGames>
+        <p>No games available.</p>
+      </ng-template>
 </div>

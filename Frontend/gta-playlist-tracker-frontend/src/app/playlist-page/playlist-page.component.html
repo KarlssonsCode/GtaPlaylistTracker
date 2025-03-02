@@ -25,5 +25,20 @@
         </div>
         <button type="submit" class="btn btn-primary">CREATE PLAYLIST</button>
     </form>
+    <div class="playlist-display" *ngIf="playlists.length > 0; else noPlayers">
+        <ul>
+          <li *ngFor="let playlist of playlists">
+            <strong>{{ playlist.name }}</strong> 
+            <button
+            class="btn btn-primary"
+            (click)="navigateToPlaylistInfoPage(playlist.id)">
+            View Details
+          </button>
+          </li>
+        </ul>
+      </div>
+      <ng-template #noPlayers>
+        <p>No players available.</p>
+      </ng-template>
 </div>
 
